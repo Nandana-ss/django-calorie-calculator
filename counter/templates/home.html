@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<!-- {% load static %} {%load mathfilters%} {%load humanize%} -->
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor"
+      crossorigin="anonymous"
+    />
+    <link href="{% static 'style.css' %}" rel="stylesheet" type="text/css" />
+    <title>Foodie Calorie Finder</title>
+    <style>
+    
+        body{
+            background-image:url(https://img.freepik.com/premium-vector/lifestyle-nutrition-concept-woman-choosing-healthy-meal-unhealthy-food_186332-492.jpg);
+            background-repeat: no-repeat; 
+            
+
+           
+            
+    
+            
+        }
+        h1{
+            font-family: Century Gothic;
+            color:blueviolet;
+            font-size: 5.60rem;
+            
+        }
+        .btnwhoop{
+            background-color: blueviolet;
+            color:white;
+            border:black;
+        }
+        .alert{
+            background-color: blueviolet;
+            color:aliceblue;
+            border: black;
+            font-size: 1.1rem;
+        }
+        .cal{
+            color: blueviolet;
+            font-size:xx-large;
+        }
+        .nut{
+            color: blueviolet;
+        }
+
+        h5{
+            color: blueviolet;
+            font-size: x-large;
+            font-weight:bolder;
+            font-family:  Century Gothic;
+        }
+        strong{
+            font-size:x-large;
+            color:rgb(57, 242, 6);
+        }
+        @media(max-width: 600px)
+        {
+            body{
+                width:100%;
+                height: auto;
+            }
+        }
+        
+    </style>
+  </head>
+ 
+  <body>
+      <div class="container">
+          <div class="row justify-content-center">
+              <div class="col-md-8 text-center">
+                  <img src="" class="img-responsive logo mb-5 mt-5" /><h1>Food Calorie Finder</h1><br>
+                  <form method="POST">
+                      
+                      <div class="input-group input-group-lg mb-5">
+                      <input type="text" name="query" class="form-control inputstyle" placeholder="search for calories in your food..." required>
+                      <button class="btnwhoop" type="submit" id="button-addon2">Find calories</button>
+                      </div>
+                  </form>
+                  <!-- {% if api %} -->
+                  <!-- {% if api == "oops! There was an error" %} -->
+                  <!-- <div class ="alert alert-warning"> Oh no! something went wrong.Please try again in sometime. </div> -->
+                  <!-- {%else%} -->
+                  <!-- <h1>{{api.0.name | capfirst}} has a total of <strong> {{api.0.calories}} Calories</strong> -->
+                    <!-- {%if api.0.calories > 200%} -->
+                     <!-- <img src="{% static 'images/shocked.png' %}" class="img-responsive" /> -->
+                     <br>
+                     <!-- {%endif%} -->
+                  </h1>
+                        <!-- {%if api.0.sodium_mg > 1000%} -->
+                      <div class="alert alert-danger d-flex align-items-center mt-3" role="alert">
+                          <div>
+                            This food contains an high amount of sugar. Sugar causes insulin spikes and is a no.1 cause for Obesity.  
+                          </div>
+                        </div>
+                        <!-- {%endif%} -->
+                    <!-- {%if api.0.sugar_g > 100%} -->
+                  <div class="alert alert-danger d-flex align-items-center mt-3" role="alert">
+                      <div>
+                          This food contains an high amount of sugar. Sugar causes insulin spikes and is a no.1 cause for Obesity.
+                      </div>
+                    </div>
+                    <!-- {%endif%} -->
+          </div>
+          <div class="row justify-content-center mt-5 mb-5">
+              <div class="col-md-10 caloriescont shadow rounded">
+                  <div class="row">
+
+                      <div class="col-md-6">
+                        <br>
+                          <h2 class="nut">Nutritional Values </h2><span></span>
+                          <br>
+                          <ul>
+                              <li class="servingsize">Serving Size per 100/Grams <span class="float-end"></span></li>
+                              <li>Carbohydrates: <span class="float-end"></span></li>
+                              <li>Cholesterol: <span class="float-end"></span></li>
+                              <li>Saturated fat: <span class="float-end"></span></li>
+                              <li>Total Fat: <span class="float-end"></span></li>
+                              <li>Fiber Content: <span class="float-end"></span></li>
+                              <li>Potassium <span class="float-end"></span></li>
+                              <li>Protein: <span class="float-end"></span></li>
+                              <li>Sodium:<span class="float-end"></span></li>
+                              <li>Sugar: <span class="float-end"></span></li>
+                          </ul>
+                      
+                      <img src="https://img.freepik.com/premium-vector/lifestyle-nutrition-concept-woman-choosing-healthy-meal-unhealthy-food_186332-506.jpg" height="600" width="500"></div>
+                      <div class="col-md-6 mb-5">
+                        <br>
+                          <h4 class="cal">To burn calories you will have to</h4><br>
+                          <div class="d-flex align-items-center mb-5">
+                              <div class="flex-shrink-0">
+                                  <img src="https://img.freepik.com/premium-vector/vector-illustration-girl-jogging-isolated-white_521900-241.jpg" height="170" width="210" alt="...">
+                              </div>
+                              <div class="flex-grow-1 ms-3">
+                                  <h5> Jog </h5>
+                                  <p>You will have to jog for <strong>10</strong> Minutes.</p>
+                              </div>
+                          </div>
+                          <div class="d-flex align-items-center mb-5">
+                              <div class="flex-shrink-0">
+                                  <img src="https://i.pinimg.com/originals/2a/ed/36/2aed36923381338080e5703c4142d55a.png" height="140" width="200"alt="...">
+                              </div>
+                              <div class="flex-grow-1 ms-4">
+                                  <h5> Do Power Yoga </h5>
+                                  <p>You will have to Power Yoga for <strong>30</strong> Minutes.</p>
+                              </div>
+                          </div>
+                          <div class="d-flex align-items-center mb-5">
+                              <div class="flex-shrink-0">
+                                  <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTa7FTs7yy7DWyustygYxUetQiMV9-wErdGFiAYl3W1uctQEo0GneX2RMru2QH11z4N0qs&usqp=CAU" height="170" width="200" alt="...">
+                              </div>
+                              <div class="flex-grow-1 ms-4">
+                                  <h5>Get a Gym Workout </h5>
+                                  <p>You will have to lift weight for <strong>15</strong> Minutes. </p>
+                              </div>
+                          </div>
+                          <div class="d-flex align-items-center">
+                              <div class="flex-shrink-0">
+                                  <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ3uQGgC3n0_MK40URA7c0uxKnIa3K-O-JUQw&usqp=CAU" height="150" width="220"alt="...">
+                              </div>
+                              <div class="flex-grow-1 ms-1">
+                                  <h5> Go for a Brisk Walk </h5>
+                                  <p>You will have to brisk walk for <strong> 20  </strong> Minutes.</p>
+                              </div>
+                          </div>
+                      </div>
+                      <div>
+                        <canvas id="myChart" width="400" height="400"></canvas>
+                        </div>
+                  </div>
+              </div>
+              <!-- {%endif%} -->
+              <!-- {%endif%} -->
+          </div>
+          <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.8.0/chart.min.js" integrity="sha512-sW/w8s4RWTdFFSduOTGtk4isV1+190E/GghVffMA9XczdJ2MDzSzLEubKAs5h0wzgSJOQTRYyaz73L3d6RtJSg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+          <script>
+            const ctx = document.getElementById('myChart').getContext('2d');
+            const myChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['carbohydrates', 'Cholesterol', 'Saturated fat', 'Total Fat', 'Fiber Content', 'Potassium', 'Protein','Sodium','Sugar'],
+                    datasets: [{
+                        label: 'Nutritional values of {{api.0.name | capfirst}}',
+                        data: [
+                              {{api.0.carbohydrates_total_g}},
+                              {{api.0.cholesterol_mg}},
+                              {{api.0.fat_saturated_g}},
+                              {{api.0.fat_saturated_g}},
+                              {{api.0.fat_total_g}},
+                              {{api.0.potassium_mg}},
+                              {{api.0.protein_g}},
+                              {{api.0.sodium_mg}},
+                              {{api.0.sugar_g}},
+                        ],
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 0.2)',
+                            'rgba(54, 162, 235, 0.2)',
+                            'rgba(255, 206, 86, 0.2)',
+                            'rgba(75, 192, 192, 0.2)',
+                            'rgba(153, 102, 255, 0.2)',
+                            'rgba(255, 159, 64, 0.2)'
+                        ],
+                        borderColor: [
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(255, 206, 86, 1)',
+                            'rgba(75, 192, 192, 1)',
+                            'rgba(153, 102, 255, 1)',
+                            'rgba(255, 159, 64, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive:true,
+                    maintainAspectRatio:false,
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+            </script>
+  </body>
+</html>
