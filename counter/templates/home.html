@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<!-- {% load static %} {%load mathfilters%} {%load humanize%} -->
+{% load static %}
+ {%load mathfilters %} 
+ {%load humanize %} 
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -16,25 +18,26 @@
     <style>
     
         body{
-            background-image:url(https://img.freepik.com/premium-vector/lifestyle-nutrition-concept-woman-choosing-healthy-meal-unhealthy-food_186332-492.jpg);
-            background-repeat: no-repeat; 
-            
-
-           
-            
-    
+            background-image:url();
+            background-repeat: no-repeat;
             
         }
         h1{
             font-family: Century Gothic;
             color:blueviolet;
-            font-size: 5.60rem;
+            font-size: 3rem;
             
+        }
+        h1 strong{
+            font-family: Century Gothic;
+            color:green;
+            font-size: 3rem; 
         }
         .btnwhoop{
             background-color: blueviolet;
             color:white;
             border:black;
+            border-radius:0px 5px 5px 0px;
         }
         .alert{
             background-color: blueviolet;
@@ -60,6 +63,12 @@
             font-size:x-large;
             color:rgb(57, 242, 6);
         }
+        .logo{
+            height:25rem;
+            width:25rem;
+            position:absolute;
+            top:;
+        }
         @media(max-width: 600px)
         {
             body{
@@ -72,41 +81,45 @@
   </head>
  
   <body>
+   
       <div class="container">
+        <img src="{% static 'images/logo.avif' %}" class="img-responsive logo" />
           <div class="row justify-content-center">
               <div class="col-md-8 text-center">
-                  <img src="" class="img-responsive logo mb-5 mt-5" /><h1>Food Calorie Finder</h1><br>
+                
+                  <h1 style="margin-top:8rem;margin-left:7rem">Food Calorie Finder</h1><br>
                   <form method="POST">
-                      
+                      {% csrf_token %}
                       <div class="input-group input-group-lg mb-5">
-                      <input type="text" name="query" class="form-control inputstyle" placeholder="search for calories in your food..." required>
-                      <button class="btnwhoop" type="submit" id="button-addon2">Find calories</button>
+                      <input type="text" style="margin-left:4rem;margin-top:2rem" name="query" class="form-control inputstyle" placeholder="search for calories in your food..." required>
+                      <button class="btnwhoop" style="margin-top:2rem" type="submit" id="button-addon2">Find calories</button>
                       </div>
                   </form>
-                  <!-- {% if api %} -->
-                  <!-- {% if api == "oops! There was an error" %} -->
-                  <!-- <div class ="alert alert-warning"> Oh no! something went wrong.Please try again in sometime. </div> -->
-                  <!-- {%else%} -->
-                  <!-- <h1>{{api.0.name | capfirst}} has a total of <strong> {{api.0.calories}} Calories</strong> -->
-                    <!-- {%if api.0.calories > 200%} -->
-                     <!-- <img src="{% static 'images/shocked.png' %}" class="img-responsive" /> -->
+                  {% if api %}
+                  {% if api == "oops! There was an error" %} 
+                  <div class ="alert alert-warning"> Oh no! something went wrong.Please try again in sometime. </div>
+                  {%else%}
+                  <br>
+                  <h1>{{api.0.name | capfirst}} has a total of <strong> {{api.0.calories}} Calories</strong>
+                    {%if api.0.calories > 200%}
+                     <img src="{% static 'images/shocked.png' %}" class="img-responsive" /> 
                      <br>
-                     <!-- {%endif%} -->
+                      {%endif%}
                   </h1>
-                        <!-- {%if api.0.sodium_mg > 1000%} -->
+                     {%if api.0.sodium_mg > 1000%}
                       <div class="alert alert-danger d-flex align-items-center mt-3" role="alert">
                           <div>
-                            This food contains an high amount of sugar. Sugar causes insulin spikes and is a no.1 cause for Obesity.  
+                            This food contains an high amount of sodium. High Sodium causes Sever dehydration and water retention.  
                           </div>
                         </div>
-                        <!-- {%endif%} -->
-                    <!-- {%if api.0.sugar_g > 100%} -->
+                        {%endif%} 
+                  {%if api.0.sugar_g > 100%}
                   <div class="alert alert-danger d-flex align-items-center mt-3" role="alert">
                       <div>
-                          This food contains an high amount of sugar. Sugar causes insulin spikes and is a no.1 cause for Obesity.
+                          This food contains a high amount of sugar. Sugar causes insulin spikes and is a no.1 cause for Obesity.
                       </div>
                     </div>
-                    <!-- {%endif%} -->
+                     {%endif%}
           </div>
           <div class="row justify-content-center mt-5 mb-5">
               <div class="col-md-10 caloriescont shadow rounded">
@@ -118,28 +131,29 @@
                           <br>
                           <ul>
                               <li class="servingsize">Serving Size per 100/Grams <span class="float-end"></span></li>
-                              <li>Carbohydrates: <span class="float-end"></span></li>
-                              <li>Cholesterol: <span class="float-end"></span></li>
-                              <li>Saturated fat: <span class="float-end"></span></li>
-                              <li>Total Fat: <span class="float-end"></span></li>
-                              <li>Fiber Content: <span class="float-end"></span></li>
-                              <li>Potassium <span class="float-end"></span></li>
-                              <li>Protein: <span class="float-end"></span></li>
-                              <li>Sodium:<span class="float-end"></span></li>
-                              <li>Sugar: <span class="float-end"></span></li>
+                              <li>Carbohydrates: <span class="float-end">{{api.0.carbohydrates_total_g}}</span></li>
+                              <li>Cholesterol: <span class="float-end">{{api.0.cholesterol_mg}}</span></li>
+                              <li>Saturated fat: <span class="float-end">{{api.0.fat_saturated_g}}</span></li>
+                              <li>Total Fat: <span class="float-end">{{api.0.fat_saturated_g}}</span></li>
+                              <li>Fiber Content: <span class="float-end">{{api.0.fat_total_g}}</span></li>
+                              <li>Potassium <span class="float-end">{{api.0.potassium_mg}}</span></li>
+                              <li>Protein: <span class="float-end">{{api.0.protein_g}}</span></li>
+                              <li>Sodium:<span class="float-end">{{api.0.sodium_mg}}</span></li>
+                              <li>Sugar: <span class="float-end">{{api.0.sugar_g}}</span></li>
+                              
                           </ul>
                       
                       <img src="https://img.freepik.com/premium-vector/lifestyle-nutrition-concept-woman-choosing-healthy-meal-unhealthy-food_186332-506.jpg" height="600" width="500"></div>
                       <div class="col-md-6 mb-5">
                         <br>
-                          <h4 class="cal">To burn calories you will have to</h4><br>
+                          <h4 class="cal">To burn {{api.0.calories}} calories you will have to</h4><br>
                           <div class="d-flex align-items-center mb-5">
                               <div class="flex-shrink-0">
                                   <img src="https://img.freepik.com/premium-vector/vector-illustration-girl-jogging-isolated-white_521900-241.jpg" height="170" width="210" alt="...">
                               </div>
                               <div class="flex-grow-1 ms-3">
                                   <h5> Jog </h5>
-                                  <p>You will have to jog for <strong>10</strong> Minutes.</p>
+                                  <p>You will have to jog for <strong>{{api.0.calories | div:378|mul:60|floatformat:0}}</strong> Minutes.</p>
                               </div>
                           </div>
                           <div class="d-flex align-items-center mb-5">
@@ -148,7 +162,7 @@
                               </div>
                               <div class="flex-grow-1 ms-4">
                                   <h5> Do Power Yoga </h5>
-                                  <p>You will have to Power Yoga for <strong>30</strong> Minutes.</p>
+                                  <p>You will have to Power Yoga for <strong>{{api.0.calories | div:223|mul:60|floatformat:0}}</strong> Minutes.</p>
                               </div>
                           </div>
                           <div class="d-flex align-items-center mb-5">
@@ -157,7 +171,7 @@
                               </div>
                               <div class="flex-grow-1 ms-4">
                                   <h5>Get a Gym Workout </h5>
-                                  <p>You will have to lift weight for <strong>15</strong> Minutes. </p>
+                                  <p>You will have to lift weight for <strong>{{api.0.calories | div:483|mul:60|floatformat:0}}</strong> Minutes. </p>
                               </div>
                           </div>
                           <div class="d-flex align-items-center">
@@ -166,7 +180,7 @@
                               </div>
                               <div class="flex-grow-1 ms-1">
                                   <h5> Go for a Brisk Walk </h5>
-                                  <p>You will have to brisk walk for <strong> 20  </strong> Minutes.</p>
+                                  <p>You will have to brisk walk for <strong>{{api.0.calories | div:294|mul:60|floatformat:0}}</strong> Minutes.</p>
                               </div>
                           </div>
                       </div>
@@ -175,8 +189,8 @@
                         </div>
                   </div>
               </div>
-              <!-- {%endif%} -->
-              <!-- {%endif%} -->
+              {%endif%}  
+              {%endif%} 
           </div>
           <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.8.0/chart.min.js" integrity="sha512-sW/w8s4RWTdFFSduOTGtk4isV1+190E/GghVffMA9XczdJ2MDzSzLEubKAs5h0wzgSJOQTRYyaz73L3d6RtJSg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
           <script>
@@ -227,6 +241,6 @@
                     }
                 }
             });
-            </script>
+            </script> 
   </body>
 </html>
